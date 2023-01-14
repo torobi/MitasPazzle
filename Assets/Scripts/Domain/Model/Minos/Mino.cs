@@ -1,5 +1,5 @@
 
-namespace Domain.Model.Mino
+namespace Domain.Model.Minos
 {
     public abstract class Mino
     {

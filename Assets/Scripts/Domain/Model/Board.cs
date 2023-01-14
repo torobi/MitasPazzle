@@ -32,7 +32,7 @@ namespace Domain.Model
     
         public State[,] board => CopyBoard();
     
-        public void PetMino(Mino.Mino mino)
+        public void PetMino(Minos.Mino mino)
         {
             var blocks = mino.CalcBlocks();
             foreach (var b in blocks)
@@ -61,7 +61,7 @@ namespace Domain.Model
             return copy;
         } 
 
-        public bool CanPut(Mino.Mino mino)
+        public bool CanPut(Minos.Mino mino)
         {
             var blocks = mino.CalcBlocks();
             foreach (var b in blocks)
@@ -73,7 +73,7 @@ namespace Domain.Model
             return true;
         }
 
-        public bool IsOnTrap(Mino.Mino mino)
+        public bool IsOnTrap(Minos.Mino mino)
         {
             var blocks = mino.CalcBlocks();
             foreach (var b in blocks)

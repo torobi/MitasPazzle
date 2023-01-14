@@ -10,7 +10,7 @@ namespace Domain.Service.Mino
             DefMinos();
         }
         
-        private Dictionary<ShapeName, Model.Mino.Mino> _minosDict = new ();
+        private Dictionary<ShapeName, Model.Minos.Mino> _minosDict = new ();
         public enum ShapeName {
             T,
             V, 
@@ -24,7 +24,7 @@ namespace Domain.Service.Mino
         static readonly int START_X = 0;
         static readonly int START_Y = 0;
 
-        public global::Domain.Model.Mino.Mino MakeMino(ShapeName shapeName)
+        public global::Domain.Model.Minos.Mino MakeMino(ShapeName shapeName)
         {
             return this._minosDict[shapeName].Clone();
         }
