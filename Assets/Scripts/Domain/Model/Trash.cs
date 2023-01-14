@@ -27,5 +27,10 @@ namespace Domain.Model
         {
             return (float)_remainTime / CoolTimeTurn;
         }
+
+        public bool CanTrash()
+        {
+            return _canTrash;
+        }
     }
 }

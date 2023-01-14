@@ -25,5 +25,10 @@ namespace Domain.Model
             _keptMino = null;
             return mino;
         }
+
+        public bool CanKeep()
+        {
+            return _canKeep;
+        }
     }
 }
