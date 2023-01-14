@@ -5,7 +5,7 @@ namespace Domain.Service.Mino
 {
     public class MinoFactory
     {
-        MinoFactory()
+        public MinoFactory()
         {
             DefMinos();
         }
