@@ -1,11 +1,11 @@
 
 namespace Domain.Model.Mino
 {
-    public class Mino
+    public abstract class Mino
     {
-        private readonly Block[] _shape; 
-        private int _x, _y;
-        private int _rotate;
+        protected readonly Block[] _shape; 
+        protected int _x, _y;
+        protected int _rotate;
 
         public Mino(Block[] shape, int x, int y, int rotate=0)
         {
@@ -14,6 +14,8 @@ namespace Domain.Model.Mino
             this._y = y;
             this._rotate = rotate;
         }
+
+        public abstract Mino Clone();
 
         private Block[] CopyShape()
         {

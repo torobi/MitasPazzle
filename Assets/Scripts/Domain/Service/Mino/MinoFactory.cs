@@ -1,10 +1,16 @@
-using Domain.Model;
-using UnityEngine;
+using System.Collections.Generic;
+using Domain.Model.Mino;
 
 namespace Domain.Service.Mino
 {
     public class MinoFactory
     {
+        MinoFactory()
+        {
+            DefMinos();
+        }
+        
+        private Dictionary<ShapeName, Model.Mino.Mino> _minosDict = new ();
         public enum ShapeName {
             T,
             V, 
@@ -18,48 +24,22 @@ namespace Domain.Service.Mino
         static readonly int START_X = 0;
         static readonly int START_Y = 0;
 
-        global::Domain.Model.Mino.Mino MakeMino(ShapeName shapeName)
+        public global::Domain.Model.Mino.Mino MakeMino(ShapeName shapeName)
         {
-            Block[] shape = GetShape(shapeName);
-            return new global::Domain.Model.Mino.Mino(shape, START_X, START_Y);
+            return this._minosDict[shapeName].Clone();
         }
 
-        private Block[] GetShape(ShapeName shapeName)
+        private void DefMinos()
         {
-            Block[] shape;
-            switch (shapeName)
-            {
-                case ShapeName.T:
-                    shape = new[] { new Block(1, 0), new Block(0, 1), new Block(1, 1), new Block(2, 1) };
-                    break;
-                case ShapeName.V:
-                    shape = new[] { new Block(1, 0), new Block(0, 1), new Block(1, 1) };
-                    break;
-                case ShapeName.I:
-                    shape = new[] { new Block(0, 1), new Block(1, 1), new Block(2, 1) };
-                    break;
-                case ShapeName.L:
-                    shape = new[] { new Block(2, 0), new Block(0, 1), new Block(1, 1), new Block(2, 1) };
-                    break;
-                case ShapeName.J:
-                    shape = new [] { new Block(0, 0), new Block(0, 1), new Block(1, 1), new Block(2, 1) };
-                    break;
-                case ShapeName.O:
-                    shape = new[] { new Block(0,0), new Block(1, 0), new Block(1, 0), new Block(1, 1) };
-                    break;
-                case ShapeName.S:
-                    shape = new[] { new Block(1, 0), new Block(2, 0), new Block(0, 1), new Block(1, 1) };
-                    break;                
-                case ShapeName.Z:
-                    shape = new[] { new Block(0, 0), new Block(1, 0), new Block(1, 1), new Block(2, 1) };
-                    break;
-                default:
-                    shape = new[] { new Block(1, 1) };
-                    Debug.LogError("予期しないShapeName");
-                    break;
-            }
-
-            return shape;
+            this._minosDict.Add(ShapeName.I, new I_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.J, new J_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.L, new L_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.O, new O_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.S, new S_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.T, new T_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.V, new V_Mino(START_X, START_Y));
+            this._minosDict.Add(ShapeName.Z, new Z_Mino(START_X, START_Y));
         }
+        
     }
 }
