@@ -1,4 +1,4 @@
-namespace Domain.Interface
+namespace Domain.IPresenter
 {
     public interface INextMinosRenderer
     {
