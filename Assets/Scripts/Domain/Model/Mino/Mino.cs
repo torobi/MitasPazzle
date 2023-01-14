@@ -40,7 +40,7 @@ namespace Domain.Model.Mino
 
         public void TurnLeft()
         {
-            this._rotate = (this._rotate - 1) % 4;
+            this._rotate = ((this._rotate + 4) - 1 ) % 4;
         }
 
         public Block[] CalcBlocks()
