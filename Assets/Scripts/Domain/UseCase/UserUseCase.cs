@@ -28,5 +28,24 @@ namespace Domain.UseCase
                 _boardRenderer.Render(_board, _currentMino.Get());
             }
         }
+
+        public void TryKeep()
+        {
+            if (_keep.CanKeep())
+            {
+                if (_keep.AlreadyKept())
+                {
+                    var beforeCurrentMino = _currentMino.Swap(_keep.PopKeptMino()); 
+                    _keep.SetKeepMino(beforeCurrentMino);
+                    _boardRenderer.Render(_board, _currentMino.Get());
+                }
+                else
+                {
+                    _keep.SetKeepMino(_currentMino.Get());
+                    _currentMino.Set(_nextMinoHandler.Pop());
+                    _boardRenderer.Render(_board, _currentMino.Get());
+                }
+            }
+        }
     }
 }

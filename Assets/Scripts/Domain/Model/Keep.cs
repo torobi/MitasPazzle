@@ -13,6 +13,7 @@ namespace Domain.Model
         public void SetKeepMino(Minos.Mino mino)
         {
             this._canKeep = false;
+            mino.Reset();
             this._keptMino = mino;
         }
 
@@ -29,6 +30,11 @@ namespace Domain.Model
         public bool CanKeep()
         {
             return _canKeep;
+        }
+
+        public bool AlreadyKept()
+        {
+            return _keptMino != null;
         }
     }
 }
