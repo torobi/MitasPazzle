@@ -3,12 +3,18 @@ namespace Domain.Model.Minos
 {
     public abstract class Mino
     {
-        protected readonly Block[] _shape; 
+        private readonly Block[] _shape; 
         protected int _x, _y;
         protected int _rotate;
 
-        public Mino(Block[] shape, int x, int y, int rotate=0)
+        private readonly int _startX, _startY, _startRotate;
+
+        protected Mino(Block[] shape, int x, int y, int rotate=0)
         {
+            this._startX = x;
+            this._startY = y;
+            this._startRotate = rotate;
+            
             this._shape = shape;
             this._x = x;
             this._y = y;
@@ -19,8 +25,8 @@ namespace Domain.Model.Minos
 
         private Block[] CopyShape()
         {
-            Block[] copy = new Block[this._shape.Length];
-            for (int i = 0; i < this._shape.Length; i++)
+            var copy = new Block[this._shape.Length];
+            for (var i = 0; i < this._shape.Length; i++)
             {
                 copy[i] = this._shape[i].copy();
             }
@@ -28,9 +34,26 @@ namespace Domain.Model.Minos
             return copy;
         }
 
+        public void Reset()
+        {
+            this._x = _startX;
+            this._y = _startY;
+            this._rotate = _startRotate;
+        }
+
         public void Drop()
         {
             this._y++;
+        }
+
+        public void MoveRight()
+        {
+            this._x++;
+        }
+
+        public void MoveLeft()
+        {
+            this._x--;
         }
 
         public void TurnRight()

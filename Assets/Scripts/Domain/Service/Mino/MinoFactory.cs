@@ -24,9 +24,27 @@ namespace Domain.Service.Mino
         static readonly int START_X = 0;
         static readonly int START_Y = 0;
 
-        public global::Domain.Model.Minos.Mino MakeMino(ShapeName shapeName)
+        public Model.Minos.Mino MakeMino(ShapeName shapeName)
         {
             return this._minosDict[shapeName].Clone();
+        }
+
+        public int MinoNum()
+        {
+            return _minosDict.Count;
+        }
+
+        public Model.Minos.Mino[] GetAllMinos()
+        {
+            var minos = new Model.Minos.Mino[_minosDict.Count];
+            var i = 0;
+            foreach (var mino in _minosDict.Values)
+            {
+                minos[i] = mino.Clone();
+                i++;
+            }
+            
+            return minos;
         }
 
         private void DefMinos()
