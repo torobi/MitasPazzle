@@ -1,3 +1,5 @@
+using Domain.Model;
+
 namespace Domain.Service.Mino
 {
     public class CurrentMino
@@ -16,9 +18,57 @@ namespace Domain.Service.Mino
 
         public Model.Minos.Mino Swap(Model.Minos.Mino mino)
         {
-            var beforeMino = _currentMino;
+            var beforeMino = _currentMino.Clone();
             _currentMino = mino;
             return beforeMino;
+        }
+
+        public void TryHardDrop(Board board)
+        {
+            while (TryDrop(board))
+            {
+                
+            }
+        }
+        public bool TryDrop(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.Drop();
+            return TryUpdate(board, mino);
+        }
+        public bool TryTurnLeft(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.TurnLeft();
+            return TryUpdate(board, mino);
+        }
+        
+        public bool TryTurnRight(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.TurnRight();
+            return TryUpdate(board, mino);
+        }
+
+        public bool TryMoveLeft(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.MoveLeft();
+            return TryUpdate(board, mino);
+        }
+        
+        public bool TryMoveRight(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.MoveRight();
+            return TryUpdate(board, mino);
+        }
+
+        private bool TryUpdate(Board board, Model.Minos.Mino mino)
+        {
+            if (!board.CanPut(mino)) return false;
+            this._currentMino = mino;
+            return true;
         }
     }
 }

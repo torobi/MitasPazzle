@@ -1,5 +1,6 @@
 using Domain.IPresenter;
 using Domain.Model;
+using Domain.Model.Minos;
 using Domain.Service.Mino;
 
 namespace Domain.UseCase
@@ -46,6 +47,30 @@ namespace Domain.UseCase
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
             }
+        }
+        
+        public void HardDrop()
+        {
+            _currentMino.TryHardDrop(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+        }
+        
+        public void TryMoveRight()
+        {
+            _currentMino.TryMoveRight(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+        }
+        
+        public void TryMoveLeft()
+        {
+            _currentMino.TryMoveLeft(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+        }
+
+        public void TryDrop()
+        {
+            _currentMino.TryDrop(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
         }
     }
 }
