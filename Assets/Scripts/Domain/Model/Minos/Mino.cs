@@ -84,5 +84,36 @@ namespace Domain.Model.Minos
 
             return blocks;
         }
+        
+        
+        public bool Equals(Mino other)
+        {
+            if (other is null) return false;
+            var _this = this.Clone();
+            var _other = other.Clone();
+            
+            _this.Reset();
+            _other.Reset();
+
+            var thisBlocks = _this.CalcBlocks();
+            var otherBlocks = _other.CalcBlocks();
+
+            if (thisBlocks.Length != otherBlocks.Length) return false;
+
+            for (int i = 0; i < thisBlocks.Length; i++)
+            {
+                if (thisBlocks[i] != otherBlocks[i]) return false;
+            }
+
+            return true;
+        }
+        
+        //Object.Equalsのオーバーライド
+        public override bool Equals(object obj) => Equals(obj as Mino);
+        //Object.GetHashCodeのオーバーライド
+        public override int GetHashCode() => (_x, _y).GetHashCode();
+        //演算子（==,!=）のオーバーロード
+        public static bool operator ==(Mino l, Mino r) => l?.Equals(r) ?? (r is null);
+        public static bool operator !=(Mino l, Mino r) => !(l == r);
     }
 }
