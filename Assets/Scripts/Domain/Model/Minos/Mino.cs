@@ -1,7 +1,9 @@
 
+using System;
+
 namespace Domain.Model.Minos
 {
-    public abstract class Mino
+    public abstract class Mino : IEquatable<Mino>
     {
         private readonly Block[] _shape; 
         protected int _x, _y;
