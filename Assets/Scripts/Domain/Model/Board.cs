@@ -40,7 +40,7 @@ namespace Domain.Model
             var blocks = mino.CalcBlocks();
             foreach (var b in blocks)
             {
-                if ((b.y < 0 && b.y >= HEIGHT) || (b.x < 0 && b.x >= WIDTH))
+                if ((b.y < 0 || b.y >= HEIGHT) || (b.x < 0 || b.x >= WIDTH))
                 {
                     Debug.LogError("盤外にミノを設置できない\n"+blocks.ToString());
                     return;
@@ -95,7 +95,7 @@ namespace Domain.Model
             var blocks = mino.CalcBlocks();
             foreach (var b in blocks)
             {
-                if ((b.y < 0 && b.y >= HEIGHT) || (b.x < 0 && b.x >= WIDTH))
+                if ((b.y < 0 || b.y >= HEIGHT) || (b.x < 0 || b.x >= WIDTH))
                 {
                     Debug.LogError("盤外にミノを設置できない\n"+blocks.ToString());
                     return false;
