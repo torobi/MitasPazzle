@@ -16,6 +16,11 @@ namespace Domain.Model
             mino.Reset();
             this._keptMino = mino;
         }
+        
+        public Minos.Mino? GetKeptMino()
+        {
+            return _keptMino;
+        } 
 
         public Minos.Mino? PopKeptMino()
         {

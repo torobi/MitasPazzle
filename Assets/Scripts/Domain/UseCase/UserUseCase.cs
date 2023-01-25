@@ -36,13 +36,15 @@ namespace Domain.UseCase
             {
                 if (_keep.AlreadyKept())
                 {
-                    var beforeCurrentMino = _currentMino.Swap(_keep.PopKeptMino()); 
+                    var beforeCurrentMino = _currentMino.Swap(_keep.PopKeptMino());
                     _keep.SetKeepMino(beforeCurrentMino);
+                    _keepRenderer.Render(_keep.GetKeptMino());
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
                 else
                 {
                     _keep.SetKeepMino(_currentMino.Get());
+                    _keepRenderer.Render(_keep.GetKeptMino());
                     _currentMino.Set(_nextMinoHandler.Pop());
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
