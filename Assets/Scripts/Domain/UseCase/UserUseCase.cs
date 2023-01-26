@@ -69,6 +69,18 @@ namespace Domain.UseCase
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
+        public void TryTurnRight()
+        {
+            _currentMino.TryTurnRight(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+        }
+        
+        public void TryTurnLeft()
+        {
+            _currentMino.TryTurnLeft(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+        }
+
         public void TryDrop()
         {
             _currentMino.TryDrop(this._board);
