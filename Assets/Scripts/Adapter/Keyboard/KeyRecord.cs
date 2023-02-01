@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Adapter
 {
     public class KeyRecord
@@ -23,7 +25,7 @@ namespace Adapter
             else if (_holdTime >= _duration)
             {
                 _callback();
-                _holdTime = 0;
+                _holdTime = 0.001f;
             }
             else if (_holdTime == 0)
             {

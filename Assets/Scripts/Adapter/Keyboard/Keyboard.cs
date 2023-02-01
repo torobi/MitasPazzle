@@ -5,7 +5,7 @@ namespace Adapter
 {
     public class Keyboard
     {
-        private Dictionary<Key, KeyRecord> _records = new();
+        private readonly Dictionary<Key, KeyRecord> _records = new();
         public enum Key
         {
             MoveRight,
