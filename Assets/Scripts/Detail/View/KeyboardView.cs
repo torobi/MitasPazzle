@@ -3,11 +3,18 @@ using Adapter;
 using Adapter.Controller;
 using Adapter.DTO;
 using UnityEngine;
+using Zenject;
 
 public class KeyboardView : MonoBehaviour
 {
-    private readonly KeyboardController _keyboardController = new();
+    private KeyboardController _keyboardController;
     private readonly Dictionary<KeyCode, Keyboard.Key> _keyTable = new();
+
+    
+    [Inject] 
+    public void Construct(KeyboardController keyboardController){ 
+        _keyboardController = keyboardController;
+    }
     
     private void Awake()
     {

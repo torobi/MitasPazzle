@@ -22,16 +22,4 @@ public class BoardTest
         Assert.IsTrue(board.CanPut(new T_Mino(2,5)));
         Assert.IsTrue(board.CanPut(new T_Mino(8,5)));
     }
-
-    [Test]
-    public void OutPutBoardTest()
-    {
-        var board = new Board();
-        var emptyOutputBoard = board.OutputBoard;
-        board.PutMino(new T_Mino(5, 1));
-        CollectionAssert.AreEquivalent(emptyOutputBoard, board.OutputBoard);
-        
-        board.PutMino(new T_Mino(5, 3));
-        CollectionAssert.AreNotEquivalent(emptyOutputBoard, board.OutputBoard);
-    }
 }

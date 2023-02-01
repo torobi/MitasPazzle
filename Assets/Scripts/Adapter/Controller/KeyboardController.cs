@@ -1,16 +1,18 @@
 using Adapter.DTO;
 using Domain.UseCase;
+using UnityEngine;
+using Zenject;
 
 namespace Adapter.Controller
 {
     public class KeyboardController
     {
         private UserUseCase _useCase;
-        private readonly Keyboard _keyboard;
+        private readonly Keyboard _keyboard = new();
 
-        public KeyboardController()
+        public KeyboardController(UserUseCase useCase)
         {
-            _keyboard = new Keyboard();
+            _useCase = useCase;
             RegisterCallbacks();
         }
 

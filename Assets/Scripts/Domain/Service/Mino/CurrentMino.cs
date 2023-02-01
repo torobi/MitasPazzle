@@ -1,10 +1,11 @@
 using Domain.Model;
+using Domain.Model.Mino;
 
 namespace Domain.Service.Mino
 {
     public class CurrentMino
     {
-        private Model.Minos.Mino _currentMino;
+        private Model.Minos.Mino _currentMino = new T_Mino(5, 0);
 
         public void Set(Model.Minos.Mino mino)
         {

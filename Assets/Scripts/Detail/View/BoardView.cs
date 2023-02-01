@@ -29,7 +29,7 @@ public class BoardView : MonoBehaviour, IBoardView
         {
             for (int j = 0; j < Board.WIDTH; j++)
             {
-                var pos = new Vector3(x+j*(0.8f+gap), y+i*(0.8f+gap));
+                var pos = new Vector3(x+j*(0.8f+gap), y-i*(0.8f+gap));
                 var scale = new Vector3(0.33f, 0.33f);
                 _blocks[i, j] = blockViewFactory.GetBlockGameObject(pos, scale).GetComponent<BlockView>();
             }

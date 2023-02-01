@@ -18,6 +18,28 @@ namespace Domain.UseCase
         private Keep _keep;
         private Trash _trash;
         
+        public GameUseCase(
+            IBoardRenderer boardRenderer,
+            // IKeepRenderer keepRenderer,
+            // INextMinosRenderer nextMinosRenderer,
+            // ITrashRenderer trashRenderer,
+            CurrentMino currentMino,
+            NextMinoHandler nextMinoHandler,
+            Board board,
+            Keep keep,
+            Trash trash
+        )
+        {
+            _boardRenderer = boardRenderer;
+            // _keepRenderer = keepRenderer;
+            // _nextMinosRenderer = nextMinosRenderer;
+            // _trashRenderer = trashRenderer;
+            _currentMino = currentMino;
+            _nextMinoHandler = nextMinoHandler;
+            _board = board;
+            _keep = keep;
+            _trash = trash;
+        }
         
         public void Drop()
         {

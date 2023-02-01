@@ -17,9 +17,14 @@ namespace Domain.Model
             Trap
         }
 
+        public Board()
+        {
+            InitState();
+        }
+
         public void InitState()
         {
-            for (int i = 0; i < HEIGHT; i++)
+            for (int i = ATTIC_HEIGHT; i < HEIGHT; i++)
             {
                 for (int j = 0; j < WIDTH; j++)
                 {
@@ -33,8 +38,7 @@ namespace Domain.Model
         }
     
         public State[,] board => CopyBoard();
-        public State[,] OutputBoard => CopyRoomBoard();
-    
+
         public void PutMino(Minos.Mino mino)
         {
             var blocks = mino.CalcBlocks();
@@ -63,21 +67,7 @@ namespace Domain.Model
 
             return copy;
         }
-
-        private State[,] CopyRoomBoard()
-        {
-            var copy = new State[ROOM_HEIGHT, WIDTH];
-            for (int i = 0; i < ROOM_HEIGHT; i++)
-            {
-                for (int j = 0; j < WIDTH; j++)
-                {
-                    copy[i, j] = _board[i + ATTIC_HEIGHT, j];
-                }
-            }
-
-            return copy;
-        }
-
+        
         public bool CanPut(Minos.Mino mino)
         {
             var blocks = mino.CalcBlocks();
