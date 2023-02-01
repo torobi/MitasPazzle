@@ -49,3 +49,6 @@ sysinfo.txt
 *.unitypackage
 
 # End of https://www.gitignore.io/api/unity
+
+# Zenject
+Assets/Plugins/Zenject*
