@@ -5,7 +5,7 @@ namespace Domain.Service.Mino
 {
     public class CurrentMino
     {
-        private Model.Minos.Mino _currentMino = new T_Mino(5, 0);
+        private Model.Minos.Mino _currentMino;
 
         public void Set(Model.Minos.Mino mino)
         {
@@ -14,7 +14,7 @@ namespace Domain.Service.Mino
 
         public Model.Minos.Mino Get()
         {
-            return this._currentMino;
+            return this._currentMino.Clone();
         }
 
         public Model.Minos.Mino Swap(Model.Minos.Mino mino)

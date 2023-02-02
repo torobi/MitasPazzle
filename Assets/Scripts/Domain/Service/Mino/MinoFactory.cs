@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Domain.Model;
 using Domain.Model.Mino;
 
 namespace Domain.Service.Mino
@@ -21,7 +22,7 @@ namespace Domain.Service.Mino
             S, 
             Z
         }
-        static readonly int START_X = 0;
+        static readonly int START_X = Board.WIDTH/2;
         static readonly int START_Y = 0;
 
         public Model.Minos.Mino MakeMino(ShapeName shapeName)

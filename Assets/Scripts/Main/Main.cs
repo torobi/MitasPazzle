@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using Domain.Service.Mino;
 using UnityEngine;
+using Zenject;
 
 public class Main : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private CurrentMino _currentMino;
+    private NextMinoHandler _nextMinoHandler;
+    
+    [Inject] 
+    public void Construct(CurrentMino currentMino, NextMinoHandler nextMinoHandler)
     {
-        
+        _currentMino = currentMino;
+        _nextMinoHandler = nextMinoHandler;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        _currentMino.Set(_nextMinoHandler.Pop());
     }
 }

@@ -47,27 +47,33 @@ namespace Domain.UseCase
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
-        public void PutMinoIfNeeded()
+        /**
+         * これ以上下がれない場合ミノを設置、currentMinoを更新、TrashとKeepをRefresh
+         * 設置した場合trueを返す
+         */
+        public bool PutMinoIfNeeded()
         {
             var mino = _currentMino.Get();
             mino.Drop();
-            if (_board.CanPut(mino)) return;
+            if (_board.CanPut(mino)) return false;
 
-            var nextMino = _nextMinoHandler.Pop();
             _board.PutMino(_currentMino.Get());
+            var nextMino = _nextMinoHandler.Pop();
             _currentMino.Set(nextMino);
             
-            _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos(null));
+            // _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
             _boardRenderer.Render(_board, _currentMino.Get());
             
             RefreshTrash();
             RefreshKeep();
+
+            return true;
         }
 
         private void RefreshTrash()
         {
             _trash.ReduceRemain();
-            _trashRenderer.UpdateTrashRemain(_trash.Remain());
+            // _trashRenderer.UpdateTrashRemain(_trash.Remain());
         }
 
         private void RefreshKeep()

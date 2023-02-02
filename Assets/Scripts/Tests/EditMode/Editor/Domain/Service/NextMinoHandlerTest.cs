@@ -18,7 +18,7 @@ public class NextMinoHandlerTest
 
     private void CheckNextMino(MinoFactory factory, NextMinoHandler nextMinoHandler)
     {
-        var nextMinos = nextMinoHandler.GetNextMinos(factory.MinoNum());
+        var nextMinos = nextMinoHandler.GetNextMinos();
         CollectionAssert.AreNotEqual(nextMinos, factory.GetAllMinos());
         CollectionAssert.AreEquivalent(nextMinos, factory.GetAllMinos());
     }

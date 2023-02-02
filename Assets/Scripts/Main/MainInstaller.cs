@@ -30,6 +30,8 @@ public class MainInstaller : MonoInstaller
         // Container.Bind<INextMinosRenderer>().To<NextMinosRenderer>();
         // Container.Bind<ITrashRenderer>().To<TrashRenderer>();
 
+        // Controller
         Container.Bind<KeyboardController>().AsSingle();
+        Container.Bind<GamePlayController>().AsSingle();
     }
 }

@@ -30,11 +30,10 @@ namespace Domain.Service.Mino
             return poppedMino;
         }
 
-        public Model.Minos.Mino[] GetNextMinos(int? _num)
+        public Model.Minos.Mino[] GetNextMinos()
         {
-            var num =　_num ?? _variationNum;
-            var minos = new Model.Minos.Mino[num];
-            for (var i = 0; i < num; i++)
+            var minos = new Model.Minos.Mino[_variationNum];
+            for (var i = 0; i < _variationNum; i++)
             {
                 minos[i] = _nextMinos[i + _index].Clone();
             }
