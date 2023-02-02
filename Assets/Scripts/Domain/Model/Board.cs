@@ -30,10 +30,17 @@ namespace Domain.Model
                 {
                     _board[i,j] = State.Blank;
                 }
-                if (i%2==1) break;
+            }
             
-                var trapNum = Random.Range(0, WIDTH);
-                _board[i, trapNum] = State.Trap;
+            CreateTraps();
+        }
+
+        private void CreateTraps()
+        {
+            for (int i = 0; i < WIDTH; i++)
+            {
+                var trapNum = Random.Range(ATTIC_HEIGHT, HEIGHT);
+                _board[trapNum, i] = State.Trap;
             }
         }
     
