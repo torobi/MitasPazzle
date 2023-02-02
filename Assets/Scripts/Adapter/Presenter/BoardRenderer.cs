@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Adapter.IView;
 using Domain.IPresenter;
 using Domain.Model;
@@ -12,7 +13,31 @@ namespace Adapter.Presenter
         [Inject]
         private IBoardView _boardView;
 
-        public void Render(Board board, Mino currentMino)
+        public void RenderGameOverBoard(Board board, Mino currentMino)
+        {
+            Render(board, currentMino);
+            var blocksOnTrap = GetBlocksOnTrap(board, currentMino);
+            foreach (var block in blocksOnTrap)
+            {
+                _boardView.SetBlockOnTrapAt(block.x, block.y);
+            }
+        }
+
+        private Block[] GetBlocksOnTrap(Board board, Mino mino)
+        {
+            var blocks = new List<Block>();
+            foreach (var b in mino.CalcBlocks())
+            {
+                if (board.board[b.y,b.x] == Board.State.Trap)
+                {
+                    blocks.Add(b.copy());
+                }
+            }
+
+            return blocks.ToArray();
+        }
+
+            public void Render(Board board, Mino currentMino)
         {
             var state = TrimBoardState(MergeBoardAndCurrentMino(board, currentMino));
             for (int y = 0; y < Board.ROOM_HEIGHT; y++)

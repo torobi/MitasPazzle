@@ -53,10 +53,21 @@ namespace Domain.UseCase
          */
         public bool PutMinoIfNeeded()
         {
-            var mino = _currentMino.Get();
-            mino.Drop();
-            if (_board.CanPut(mino)) return false;
+            // 落下可能なら設置しない
+            if (_currentMino.CanDrop(_board)) return false;
 
+            if (_board.IsOnTrap(_currentMino.Get()))
+            {
+                GameOver();
+                return true;
+            }
+
+            if (_board.IsOnAttic(_currentMino.Get()))
+            {
+                GameClear();
+                return true;
+            }
+            
             _board.PutMino(_currentMino.Get());
             var nextMino = _nextMinoHandler.Pop();
             _currentMino.Set(nextMino);
@@ -68,6 +79,16 @@ namespace Domain.UseCase
             RefreshKeep();
 
             return true;
+        }
+
+        private void GameOver()
+        {
+            _boardRenderer.
+        }
+
+        private void GameClear()
+        {
+            
         }
 
         private void RefreshTrash()

@@ -47,4 +47,9 @@ public class BoardView : MonoBehaviour, IBoardView
     {
         _blocks[y, x].UpdateState(_stateTable[state]);
     }
+
+    public void SetBlockOnTrapAt(int x, int y)
+    {
+        
+    }
 }

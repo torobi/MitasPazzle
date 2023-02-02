@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Domain.Model
@@ -101,6 +102,12 @@ namespace Domain.Model
             }
 
             return false;
+        }
+
+        public bool IsOnAttic(Minos.Mino mino)
+        {
+            var blocks = mino.CalcBlocks();
+            return blocks.Any(b => b.y < ATTIC_HEIGHT);
         }
     }
 }

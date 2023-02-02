@@ -24,6 +24,13 @@ namespace Domain.Service.Mino
             return beforeMino;
         }
 
+        public bool CanDrop(Board board)
+        {
+            var mino = this._currentMino.Clone();
+            mino.Drop();
+            return board.CanPut(mino);
+        }
+        
         public void TryHardDrop(Board board)
         {
             while (TryDrop(board))
