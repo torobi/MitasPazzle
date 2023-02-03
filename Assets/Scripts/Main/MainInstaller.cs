@@ -25,6 +25,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<GameUseCase>().AsSingle();
         
         // Presenter
+        Container.Bind<IMainLoopHandler>().To<MainLoopHandler>().AsSingle();
         Container.Bind<IBoardRenderer>().To<BoardRenderer>().AsSingle();
         // Container.Bind<IKeepRenderer>().To<KeepRenderer>();
         // Container.Bind<INextMinosRenderer>().To<NextMinosRenderer>();

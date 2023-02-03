@@ -1,11 +1,14 @@
 using Domain.IPresenter;
 using Domain.Model;
 using Domain.Service.Mino;
+using UnityEngine;
 
 namespace Domain.UseCase
 {
     public class GameUseCase
     {
+        private IMainLoopHandler _loopHandler;
+        
         private IBoardRenderer _boardRenderer;
         private IKeepRenderer _keepRenderer;
         private INextMinosRenderer _nextMinosRenderer;
@@ -19,6 +22,7 @@ namespace Domain.UseCase
         private Trash _trash;
         
         public GameUseCase(
+            IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
             // IKeepRenderer keepRenderer,
             // INextMinosRenderer nextMinosRenderer,
@@ -30,6 +34,7 @@ namespace Domain.UseCase
             Trash trash
         )
         {
+            _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
             // _keepRenderer = keepRenderer;
             // _nextMinosRenderer = nextMinosRenderer;
@@ -83,12 +88,17 @@ namespace Domain.UseCase
 
         private void GameOver()
         {
+            Debug.Log("game over.");
+            _loopHandler.Pause();
+            _board.PutMino(_currentMino.Get());
             // _boardRenderer.
         }
 
         private void GameClear()
         {
-            
+            Debug.Log("game clear!");
+            _loopHandler.Pause();
+            _board.PutMino(_currentMino.Get());
         }
 
         private void RefreshTrash()

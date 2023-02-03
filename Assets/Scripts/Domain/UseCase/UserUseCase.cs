@@ -2,12 +2,14 @@ using Domain.IPresenter;
 using Domain.Model;
 using Domain.Model.Minos;
 using Domain.Service.Mino;
+using UnityEngine;
 using Zenject;
 
 namespace Domain.UseCase
 {
     public class UserUseCase
     {
+        private IMainLoopHandler _loopHandler;
         private IBoardRenderer _boardRenderer;
         private IKeepRenderer _keepRenderer;
         private INextMinosRenderer _nextMinosRenderer;
@@ -21,6 +23,7 @@ namespace Domain.UseCase
         private Trash _trash;
         
         public UserUseCase(
+            IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
             // IKeepRenderer keepRenderer,
             // INextMinosRenderer nextMinosRenderer,
@@ -32,6 +35,7 @@ namespace Domain.UseCase
             Trash trash
             )
         {
+            _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
             // _keepRenderer = keepRenderer;
             // _nextMinosRenderer = nextMinosRenderer;
@@ -45,17 +49,20 @@ namespace Domain.UseCase
         
         public void TryTrash()
         {
+            if (_loopHandler.IsPaused()) return;
             if (_trash.CanTrash())
             {
                 _trash.TrashMino();
                 _trashRenderer.UpdateTrashRemain(_trash.Remain());
                 _currentMino.Set(_nextMinoHandler.Pop());
                 _boardRenderer.Render(_board, _currentMino.Get());
+                _loopHandler.ResetTiming();
             }
         }
 
         public void TryKeep()
         {
+            if (_loopHandler.IsPaused()) return;
             if (_keep.CanKeep())
             {
                 if (_keep.AlreadyKept())
@@ -72,43 +79,52 @@ namespace Domain.UseCase
                     _currentMino.Set(_nextMinoHandler.Pop());
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
+                _loopHandler.ResetTiming();
             }
         }
         
         public void HardDrop()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryHardDrop(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
+            _loopHandler.ResetTiming();
         }
         
         public void TryMoveRight()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryMoveRight(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
         }
         
         public void TryMoveLeft()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryMoveLeft(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
         public void TryTurnRight()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryTurnRight(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
         }
         
         public void TryTurnLeft()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryTurnLeft(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
         public void TryDrop()
         {
+            if (_loopHandler.IsPaused()) return;
             _currentMino.TryDrop(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
+            _loopHandler.ResetTiming();
         }
     }
 }
