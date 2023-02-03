@@ -23,7 +23,7 @@ namespace Domain.Service.Mino
             Z
         }
         static readonly int START_X = Board.WIDTH/2;
-        static readonly int START_Y = 0;
+        static readonly int START_Y = 1;
 
         public Model.Minos.Mino MakeMino(ShapeName shapeName)
         {

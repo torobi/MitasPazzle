@@ -58,12 +58,12 @@ namespace Domain.Model.Minos
             this._x--;
         }
 
-        public void TurnRight()
+        public virtual void TurnRight()
         {
             this._rotate = (this._rotate + 1) % 4;
         }
 
-        public void TurnLeft()
+        public virtual void TurnLeft()
         {
             this._rotate = ((this._rotate + 4) - 1 ) % 4;
         }
