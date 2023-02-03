@@ -56,7 +56,14 @@ namespace Adapter.Presenter
             foreach (var block in blocks)
             {
                 if ((block.y < 0 || block.y >= Board.HEIGHT) || (block.x < 0 || block.x >= Board.WIDTH)) continue;
-                state[block.y, block.x] = Board.State.Block;
+                if (state[block.y, block.x] == Board.State.Trap)
+                {
+                    state[block.y, block.x] = Board.State.BlockOnTrap;
+                }
+                else
+                {
+                    state[block.y, block.x] = Board.State.Block;
+                }
             }
 
             return state;

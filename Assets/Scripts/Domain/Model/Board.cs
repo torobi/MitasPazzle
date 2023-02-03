@@ -15,7 +15,8 @@ namespace Domain.Model
         {
             Blank,
             Block,
-            Trap
+            Trap,
+            BlockOnTrap
         }
 
         public Board()

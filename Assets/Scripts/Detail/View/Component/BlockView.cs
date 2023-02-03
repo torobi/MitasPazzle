@@ -13,6 +13,7 @@ public class BlockView : MonoBehaviour
     [SerializeField] private Sprite black;
     [SerializeField] private Sprite red;
     [SerializeField] private Sprite white;
+    [SerializeField] private Sprite yellow;
 
     private readonly Dictionary<BlockState, Sprite> _sprites = new();
 
@@ -28,7 +29,8 @@ public class BlockView : MonoBehaviour
     {
         Black,
         Red,
-        White
+        White,
+        Yellow
     }
 
     private void Awake()
@@ -43,6 +45,7 @@ public class BlockView : MonoBehaviour
         _sprites[BlockState.Black] = black;
         _sprites[BlockState.Red] = red;
         _sprites[BlockState.White] = white;
+        _sprites[BlockState.Yellow] = yellow;
     }
 
     public void UpdateState(BlockState state)

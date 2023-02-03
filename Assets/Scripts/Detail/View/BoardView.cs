@@ -38,9 +38,10 @@ public class BoardView : MonoBehaviour, IBoardView
 
     private void DefStateTable()
     {
-        _stateTable[Board.State.Blank] = BlockView.BlockState.Black;
-        _stateTable[Board.State.Block] = BlockView.BlockState.White;
-        _stateTable[Board.State.Trap]  = BlockView.BlockState.Red;
+        _stateTable[Board.State.Blank]       = BlockView.BlockState.Black;
+        _stateTable[Board.State.Block]       = BlockView.BlockState.White;
+        _stateTable[Board.State.Trap]        = BlockView.BlockState.Red;
+        _stateTable[Board.State.BlockOnTrap] = BlockView.BlockState.Yellow;
     }
     
     public void SetStateAt(int x, int y, Board.State state)

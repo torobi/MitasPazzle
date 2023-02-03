@@ -101,3 +101,4 @@ MonoBehaviour:
   black: {fileID: 29864843, guid: a837987f105ae4cde9240a797ba3af81, type: 3}
   red: {fileID: -1600757442, guid: a837987f105ae4cde9240a797ba3af81, type: 3}
   white: {fileID: 1349412372, guid: a837987f105ae4cde9240a797ba3af81, type: 3}
+  yellow: {fileID: 1583971802, guid: 653da31ea3a0b4f2090588b454827705, type: 3}

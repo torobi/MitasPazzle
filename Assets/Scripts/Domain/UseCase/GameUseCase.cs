@@ -83,7 +83,7 @@ namespace Domain.UseCase
 
         private void GameOver()
         {
-            _boardRenderer.
+            // _boardRenderer.
         }
 
         private void GameClear()
