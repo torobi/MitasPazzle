@@ -25,7 +25,7 @@ namespace Domain.UseCase
             IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
             INextMinosRenderer nextMinosRenderer,
-            // IKeepRenderer keepRenderer,
+            IKeepRenderer keepRenderer,
             // ITrashRenderer trashRenderer,
             CurrentMino currentMino,
             NextMinoHandler nextMinoHandler,
@@ -37,7 +37,7 @@ namespace Domain.UseCase
             _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
             _nextMinosRenderer = nextMinosRenderer;
-            // _keepRenderer = keepRenderer;
+            _keepRenderer = keepRenderer;
             // _trashRenderer = trashRenderer;
             _currentMino = currentMino;
             _nextMinoHandler = nextMinoHandler;

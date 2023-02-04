@@ -32,7 +32,7 @@ public class MinoView : MonoBehaviour
         }
     }
 
-    private void Reset()
+    public void Reset()
     {
         for (int i = 0; i < BLOCKS_HEIGHT; i++)
         {

@@ -25,8 +25,8 @@ namespace Domain.UseCase
         public UserUseCase(
             IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
-            // IKeepRenderer keepRenderer,
-            // INextMinosRenderer nextMinosRenderer,
+            IKeepRenderer keepRenderer,
+            INextMinosRenderer nextMinosRenderer,
             // ITrashRenderer trashRenderer,
             CurrentMino currentMino,
             NextMinoHandler nextMinoHandler,
@@ -37,8 +37,8 @@ namespace Domain.UseCase
         {
             _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
-            // _keepRenderer = keepRenderer;
-            // _nextMinosRenderer = nextMinosRenderer;
+            _keepRenderer = keepRenderer;
+            _nextMinosRenderer = nextMinosRenderer;
             // _trashRenderer = trashRenderer;
             _currentMino = currentMino;
             _nextMinoHandler = nextMinoHandler;
@@ -77,6 +77,7 @@ namespace Domain.UseCase
                     _keep.SetKeepMino(_currentMino.Get());
                     _keepRenderer.Render(_keep.GetKeptMino());
                     _currentMino.Set(_nextMinoHandler.Pop());
+                    _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
                 _loopHandler.ResetTiming();

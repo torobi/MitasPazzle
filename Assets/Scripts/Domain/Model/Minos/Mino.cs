@@ -1,5 +1,7 @@
 
 using System;
+using Domain.Service.Mino;
+using UnityEngine;
 
 namespace Domain.Model.Minos
 {
@@ -8,15 +10,9 @@ namespace Domain.Model.Minos
         private readonly Block[] _shape; 
         protected int _x, _y;
         protected int _rotate;
-
-        private readonly int _startX, _startY, _startRotate;
-
+        
         protected Mino(Block[] shape, int x, int y, int rotate=0)
         {
-            this._startX = x;
-            this._startY = y;
-            this._startRotate = rotate;
-            
             this._shape = shape;
             this._x = x;
             this._y = y;
@@ -38,9 +34,9 @@ namespace Domain.Model.Minos
 
         public void Reset()
         {
-            this._x = _startX;
-            this._y = _startY;
-            this._rotate = _startRotate;
+            this._x = MinoFactory.START_X;
+            this._y = MinoFactory.START_Y;
+            this._rotate = MinoFactory.START_ROTATE;
         }
 
         public void Drop()
