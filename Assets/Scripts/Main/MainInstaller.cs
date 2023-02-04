@@ -29,7 +29,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<IBoardRenderer>().To<BoardRenderer>().AsSingle();
         Container.Bind<IKeepRenderer>().To<KeepRenderer>().AsSingle();
         Container.Bind<INextMinosRenderer>().To<NextMinosRenderer>().AsSingle();
-        // Container.Bind<ITrashRenderer>().To<TrashRenderer>();
+        Container.Bind<ITrashRenderer>().To<TrashRenderer>().AsSingle();
 
         // Controller
         Container.Bind<KeyboardController>().AsSingle();

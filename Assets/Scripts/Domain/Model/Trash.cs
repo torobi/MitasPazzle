@@ -2,7 +2,7 @@ namespace Domain.Model
 {
     public class Trash
     {
-        private const int CoolTimeTurn = 3;
+        private const int CoolTimeTurn = 4;
         private int _remainTime = 0; // 0でTrash可能
         private bool _canTrash = true;
 
@@ -23,9 +23,9 @@ namespace Domain.Model
             _remainTime = CoolTimeTurn;
         }
 
-        public float Remain()
+        public int Remain()
         {
-            return (float)_remainTime / CoolTimeTurn;
+            return _remainTime;
         }
 
         public bool CanTrash()

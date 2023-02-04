@@ -27,7 +27,7 @@ namespace Domain.UseCase
             IBoardRenderer boardRenderer,
             IKeepRenderer keepRenderer,
             INextMinosRenderer nextMinosRenderer,
-            // ITrashRenderer trashRenderer,
+            ITrashRenderer trashRenderer,
             CurrentMino currentMino,
             NextMinoHandler nextMinoHandler,
             Board board,
@@ -39,7 +39,7 @@ namespace Domain.UseCase
             _boardRenderer = boardRenderer;
             _keepRenderer = keepRenderer;
             _nextMinosRenderer = nextMinosRenderer;
-            // _trashRenderer = trashRenderer;
+            _trashRenderer = trashRenderer;
             _currentMino = currentMino;
             _nextMinoHandler = nextMinoHandler;
             _board = board;
