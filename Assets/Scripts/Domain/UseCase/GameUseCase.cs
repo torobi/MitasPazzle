@@ -10,8 +10,8 @@ namespace Domain.UseCase
         private IMainLoopHandler _loopHandler;
         
         private IBoardRenderer _boardRenderer;
-        private IKeepRenderer _keepRenderer;
         private INextMinosRenderer _nextMinosRenderer;
+        private IKeepRenderer _keepRenderer;
         private ITrashRenderer _trashRenderer;
         
         private CurrentMino _currentMino;
@@ -24,8 +24,8 @@ namespace Domain.UseCase
         public GameUseCase(
             IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
+            INextMinosRenderer nextMinosRenderer,
             // IKeepRenderer keepRenderer,
-            // INextMinosRenderer nextMinosRenderer,
             // ITrashRenderer trashRenderer,
             CurrentMino currentMino,
             NextMinoHandler nextMinoHandler,
@@ -36,8 +36,8 @@ namespace Domain.UseCase
         {
             _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
+            _nextMinosRenderer = nextMinosRenderer;
             // _keepRenderer = keepRenderer;
-            // _nextMinosRenderer = nextMinosRenderer;
             // _trashRenderer = trashRenderer;
             _currentMino = currentMino;
             _nextMinoHandler = nextMinoHandler;
@@ -77,7 +77,7 @@ namespace Domain.UseCase
             var nextMino = _nextMinoHandler.Pop();
             _currentMino.Set(nextMino);
             
-            // _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
+            _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
             _boardRenderer.Render(_board, _currentMino.Get());
             
             RefreshTrash();

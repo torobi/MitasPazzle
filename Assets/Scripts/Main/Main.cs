@@ -11,14 +11,16 @@ public class Main : MonoBehaviour
     private NextMinoHandler _nextMinoHandler;
     private Board _board;
     private IBoardRenderer _boardRenderer;
+    private INextMinosRenderer _nextMinosRenderer;
     
     [Inject] 
-    public void Construct(CurrentMino currentMino, NextMinoHandler nextMinoHandler, Board board, IBoardRenderer boardRenderer)
+    public void Construct(CurrentMino currentMino, NextMinoHandler nextMinoHandler, Board board, IBoardRenderer boardRenderer, INextMinosRenderer nextMinosRenderer)
     {
         _currentMino = currentMino;
         _nextMinoHandler = nextMinoHandler;
         _board = board;
         _boardRenderer = boardRenderer;
+        _nextMinosRenderer = nextMinosRenderer;
     }
 
     private void Awake()
@@ -30,5 +32,6 @@ public class Main : MonoBehaviour
     {
         _board.InitState();
         _boardRenderer.Render(_board, _currentMino.Get());
+        _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
     }
 }
