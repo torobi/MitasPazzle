@@ -1,5 +1,6 @@
 using Domain.IPresenter;
 using Domain.Model;
+using Domain.Service;
 using Domain.Service.Mino;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ namespace Domain.UseCase
         private INextMinosRenderer _nextMinosRenderer;
         private IKeepRenderer _keepRenderer;
         private ITrashRenderer _trashRenderer;
-        
+        private IResultRenderer _resultRenderer;
+
+        private ScoreCalculator _scoreCalculator;
         private CurrentMino _currentMino;
         private NextMinoHandler _nextMinoHandler;
         
@@ -27,6 +30,8 @@ namespace Domain.UseCase
             INextMinosRenderer nextMinosRenderer,
             IKeepRenderer keepRenderer,
             ITrashRenderer trashRenderer,
+            IResultRenderer resultRenderer,
+            ScoreCalculator scoreCalculator,
             CurrentMino currentMino,
             NextMinoHandler nextMinoHandler,
             Board board,
@@ -39,6 +44,8 @@ namespace Domain.UseCase
             _nextMinosRenderer = nextMinosRenderer;
             _keepRenderer = keepRenderer;
             _trashRenderer = trashRenderer;
+            _resultRenderer = resultRenderer;
+            _scoreCalculator = scoreCalculator;
             _currentMino = currentMino;
             _nextMinoHandler = nextMinoHandler;
             _board = board;
@@ -91,7 +98,7 @@ namespace Domain.UseCase
             Debug.Log("game over.");
             _loopHandler.Pause();
             _board.PutMino(_currentMino.Get());
-            // _boardRenderer.
+            _resultRenderer.RenderGameOver();
         }
 
         private void GameClear()
@@ -99,6 +106,7 @@ namespace Domain.UseCase
             Debug.Log("game clear!");
             _loopHandler.Pause();
             _board.PutMino(_currentMino.Get());
+            _resultRenderer.RenderGameClear(_scoreCalculator.Calc(_board));
         }
 
         private void RefreshTrash()

@@ -2,6 +2,7 @@ using Adapter.Controller;
 using Adapter.Presenter;
 using Domain.IPresenter;
 using Domain.Model;
+using Domain.Service;
 using Domain.Service.Mino;
 using Domain.UseCase;
 using UnityEngine;
@@ -17,9 +18,10 @@ public class MainInstaller : MonoInstaller
         Container.Bind<Trash>().AsSingle();
         
         // Service
+        Container.Bind<ScoreCalculator>().AsSingle();
         Container.Bind<CurrentMino>().AsSingle();
         Container.Bind<NextMinoHandler>().FromInstance(new NextMinoHandler(new MinoFactory())).AsSingle();
-        
+
         // UseCase
         Container.Bind<UserUseCase>().AsSingle();
         Container.Bind<GameUseCase>().AsSingle();
@@ -30,6 +32,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<IKeepRenderer>().To<KeepRenderer>().AsSingle();
         Container.Bind<INextMinosRenderer>().To<NextMinosRenderer>().AsSingle();
         Container.Bind<ITrashRenderer>().To<TrashRenderer>().AsSingle();
+        Container.Bind<IResultRenderer>().To<ResultRenderer>().AsSingle();
 
         // Controller
         Container.Bind<KeyboardController>().AsSingle();
