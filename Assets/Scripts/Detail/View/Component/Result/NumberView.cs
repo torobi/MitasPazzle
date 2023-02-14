@@ -28,15 +28,4 @@ public class NumberView : MonoBehaviour
             spriteRenderersLtoR[i].enabled = true;
         }
     }
-    
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 }

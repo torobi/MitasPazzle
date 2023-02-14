@@ -10,7 +10,6 @@ public class TrashView : MonoBehaviour, ITrashView
     
     public void UpdateTrashRemain(int remain)
     {
-        Debug.Log(remain);
         spriteRenderer.sprite = sprites[remain];
     }
 }

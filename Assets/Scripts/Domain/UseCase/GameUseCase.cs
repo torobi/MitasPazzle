@@ -95,7 +95,6 @@ namespace Domain.UseCase
 
         private void GameOver()
         {
-            Debug.Log("game over.");
             _loopHandler.Pause();
             _board.PutMino(_currentMino.Get());
             _resultRenderer.RenderGameOver();
@@ -103,7 +102,6 @@ namespace Domain.UseCase
 
         private void GameClear()
         {
-            Debug.Log("game clear!");
             _loopHandler.Pause();
             _board.PutMino(_currentMino.Get());
             _resultRenderer.RenderGameClear(_scoreCalculator.Calc(_board));
