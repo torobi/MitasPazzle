@@ -55,6 +55,7 @@ namespace Domain.UseCase
                 _trash.TrashMino();
                 _trashRenderer.UpdateTrashRemain(_trash.Remain());
                 _currentMino.Set(_nextMinoHandler.Pop());
+                _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
                 _boardRenderer.Render(_board, _currentMino.Get());
                 _loopHandler.ResetTiming();
             }
