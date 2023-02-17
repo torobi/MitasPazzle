@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b5e97f1a70dc34bc1817ba5e14108b4e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - MuseoModerno
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 21e37f6cbd6a346b290a145311915a37, type: 3}
+  - {fileID: 12800000, guid: f44baea6454574df3b9c8dc826546b9c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

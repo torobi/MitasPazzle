@@ -8,6 +8,7 @@ namespace Domain.ITransition
     public enum Destination
     {
         TitleScene,
+        RuleScene,
         MainScene
     }
 }
