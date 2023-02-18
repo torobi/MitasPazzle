@@ -15,5 +15,20 @@ namespace Adapter.Controller
         {
             _ruleUseCase.BackToTitle();
         }
+
+        public void ClickRightArrowButton()
+        {
+            _ruleUseCase.TryGoToNextPage();
+        }
+
+        public void ClickLeftArrowButton()
+        {
+            _ruleUseCase.TryGoToPrevPage();
+        }
+
+        public void ClickPageDotButton(int pageNum)
+        {
+            _ruleUseCase.TryGoToPage(pageNum);
+        }
     }
 }
