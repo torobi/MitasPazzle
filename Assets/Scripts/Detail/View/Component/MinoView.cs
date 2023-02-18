@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class MinoView : MonoBehaviour
 {
-    [SerializeField] private BlockViewFactory blockViewFactory;
     private static readonly int BLOCKS_WIDTH = 3;
     private static readonly int BLOCKS_HEIGHT = 2;
     private BlockView[,] _blocks = new BlockView[BLOCKS_HEIGHT, BLOCKS_WIDTH]; 

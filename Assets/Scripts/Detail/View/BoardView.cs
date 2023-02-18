@@ -10,7 +10,9 @@ public class BoardView : MonoBehaviour, IBoardView
     [SerializeField] private float x;
     [SerializeField] private float y;
     [SerializeField] private float gap;
-    private readonly BlockView[,] _blocks = new BlockView[Board.ROOM_HEIGHT, Board.WIDTH];
+    [SerializeField] private int HEIGHT = Board.ROOM_HEIGHT;
+    [SerializeField] private int WIDTH = Board.WIDTH;
+    private BlockView[,] _blocks;
     private readonly Dictionary<Board.State, BlockView.BlockState> _stateTable = new();
 
     public BoardView()
@@ -25,13 +27,16 @@ public class BoardView : MonoBehaviour, IBoardView
 
     private void CreateBlocks()
     {
-        for (int i = 0; i < Board.ROOM_HEIGHT; i++)
+        var transform = this.GetComponent<Transform>();
+        
+        _blocks = new BlockView[HEIGHT, WIDTH];
+        for (var i = 0; i < HEIGHT; i++)
         {
-            for (int j = 0; j < Board.WIDTH; j++)
+            for (var j = 0; j < WIDTH; j++)
             {
                 var pos = new Vector3(x+j*(0.8f+gap), y-i*(0.8f+gap));
                 var scale = new Vector3(0.33f, 0.33f);
-                _blocks[i, j] = blockViewFactory.GetBlockGameObject(pos, scale).GetComponent<BlockView>();
+                _blocks[i, j] = blockViewFactory.GetBlockGameObject(pos, scale, transform).GetComponent<BlockView>();
             }
         }
     }
