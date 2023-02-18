@@ -37,12 +37,12 @@ namespace Adapter.Presenter
             return blocks.ToArray();
         }
 
-            public void Render(Board board, Mino currentMino)
+        public void Render(Board board, Mino currentMino)
         {
-            var state = TrimBoardState(MergeBoardAndCurrentMino(board, currentMino));
-            for (int y = 0; y < Board.ROOM_HEIGHT; y++)
+            var state = TrimBoardState(board, MergeBoardAndCurrentMino(board, currentMino));
+            for (int y = 0; y < board.ROOM_HEIGHT; y++)
             {
-                for (int x = 0; x < Board.WIDTH; x++)
+                for (int x = 0; x < board.WIDTH; x++)
                 {
                     _boardView.SetStateAt(x, y, state[y, x]);
                 }
@@ -55,7 +55,7 @@ namespace Adapter.Presenter
             var blocks = currentMino.CalcBlocks();
             foreach (var block in blocks)
             {
-                if ((block.y < 0 || block.y >= Board.HEIGHT) || (block.x < 0 || block.x >= Board.WIDTH)) continue;
+                if ((block.y < 0 || block.y >= board.HEIGHT) || (block.x < 0 || block.x >= board.WIDTH)) continue;
                 if (state[block.y, block.x] == Board.State.Trap)
                 {
                     state[block.y, block.x] = Board.State.BlockOnTrap;
@@ -69,14 +69,14 @@ namespace Adapter.Presenter
             return state;
         }
 
-        private Board.State[,] TrimBoardState(Board.State[,] state)
+        private Board.State[,] TrimBoardState(Board board, Board.State[,] state)
         {
-            var trimmedState = new Board.State[Board.ROOM_HEIGHT, Board.WIDTH];
-            for (int i = 0; i < Board.ROOM_HEIGHT; i++)
+            var trimmedState = new Board.State[board.ROOM_HEIGHT, board.WIDTH];
+            for (int i = 0; i < board.ROOM_HEIGHT; i++)
             {
-                for (int j = 0; j < Board.WIDTH; j++)
+                for (int j = 0; j < board.WIDTH; j++)
                 {
-                    trimmedState[i, j] = state[i + Board.ATTIC_HEIGHT, j];
+                    trimmedState[i, j] = state[i + board.ATTIC_HEIGHT, j];
                 }
             }
 

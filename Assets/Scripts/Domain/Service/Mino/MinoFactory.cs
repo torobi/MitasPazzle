@@ -6,7 +6,7 @@ namespace Domain.Service.Mino
 {
     public class MinoFactory
     {
-        public static readonly int START_X = Board.WIDTH/2;
+        public static readonly int START_X = Board.DEFAULT_WIDTH/2;
         public static readonly int START_Y = 1;
         public static readonly int START_ROTATE = 0;
         private Dictionary<ShapeName, Model.Minos.Mino> _minosDict = new ();

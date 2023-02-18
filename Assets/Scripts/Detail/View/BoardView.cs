@@ -10,8 +10,8 @@ public class BoardView : MonoBehaviour, IBoardView
     [SerializeField] private float x;
     [SerializeField] private float y;
     [SerializeField] private float gap;
-    [SerializeField] private int HEIGHT = Board.ROOM_HEIGHT;
-    [SerializeField] private int WIDTH = Board.WIDTH;
+    [SerializeField] private int HEIGHT = Board.DEFAULT_ROOM_HEIGHT;
+    [SerializeField] private int WIDTH = Board.DEFAULT_WIDTH;
     private BlockView[,] _blocks;
     private readonly Dictionary<Board.State, BlockView.BlockState> _stateTable = new();
 
@@ -56,6 +56,11 @@ public class BoardView : MonoBehaviour, IBoardView
 
     public void SetBlockOnTrapAt(int x, int y)
     {
-        
+        // TODO: ゲームオーバー時の表現
+    }
+
+    public void SetAlphaAt(int x, int y, float alpha)
+    {
+        _blocks[y, x].SetAlpha(alpha);
     }
 }

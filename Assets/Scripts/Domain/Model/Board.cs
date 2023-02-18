@@ -5,11 +5,16 @@ namespace Domain.Model
 {
     public class Board
     {
-        public static readonly int WIDTH = 13;
-        public static readonly int ATTIC_HEIGHT = 3;
-        public static readonly int ROOM_HEIGHT = 12;
-        public static readonly int HEIGHT = ATTIC_HEIGHT + ROOM_HEIGHT;
-        private State[,] _board = new State[HEIGHT,WIDTH]; // 0=空白, 1=ブロック, 2=不可マス
+        public const int DEFAULT_ROOM_HEIGHT = 12;
+        public const int DEFAULT_ATTIC_HEIGHT = 3;
+        public const int DEFAULT_HEIGHT = DEFAULT_ROOM_HEIGHT + DEFAULT_ATTIC_HEIGHT;
+        public const int DEFAULT_WIDTH = 13;
+        
+        public readonly int WIDTH;
+        public readonly int ATTIC_HEIGHT;
+        public readonly int ROOM_HEIGHT;
+        public readonly int HEIGHT;
+        private State[,] _board; // 0=空白, 1=ブロック, 2=不可マス
 
         public enum State
         {
@@ -19,8 +24,14 @@ namespace Domain.Model
             BlockOnTrap
         }
 
-        public Board()
+        public Board(int width = DEFAULT_WIDTH, int roomHeight = DEFAULT_ROOM_HEIGHT, int atticHeight = DEFAULT_ATTIC_HEIGHT)
         {
+            WIDTH = width;
+            ROOM_HEIGHT = roomHeight;
+            ATTIC_HEIGHT = atticHeight;
+            HEIGHT = roomHeight + atticHeight;
+            _board = new State[HEIGHT,WIDTH]; 
+            
             InitState();
         }
 

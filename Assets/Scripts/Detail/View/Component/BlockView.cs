@@ -52,4 +52,11 @@ public class BlockView : MonoBehaviour
     {
         _spriteRenderer.sprite = _sprites[state];
     }
+
+    public void SetAlpha(float alpha)
+    {
+        var color = _spriteRenderer.color;
+        color.a = alpha;
+        _spriteRenderer.color = color;
+    }
 }

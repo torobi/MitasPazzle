@@ -32,7 +32,7 @@ public class CurrentMinoTest
     {
         var board = new Board();
         var currentMino = new CurrentMino();
-        var startX = Board.WIDTH - 5;
+        var startX = Board.DEFAULT_WIDTH - 5;
         currentMino.Set(new T_Mino(startX, 1));
         Assert.IsTrue(new T_Mino(startX,1) == currentMino.Get());
 
@@ -78,7 +78,7 @@ public class CurrentMinoTest
         Assert.IsTrue(new T_Mino(2, 1, 1) == currentMino.Get());
         
         // 壁際で回転しようとしてもできない
-        var x = Board.WIDTH - 1;
+        var x = Board.DEFAULT_WIDTH - 1;
         currentMino.Set(new T_Mino(x, 1, 1));
         Assert.IsTrue(new T_Mino(x, 1, 1) == currentMino.Get());
         currentMino.TryTurnRight(board);
@@ -91,7 +91,7 @@ public class CurrentMinoTest
         var board = new Board();
         var currentMino = new CurrentMino();
 
-        var startY = Board.HEIGHT - 3;
+        var startY = Board.DEFAULT_HEIGHT - 3;
         currentMino.Set(new T_Mino(2, startY));
         Assert.IsTrue(new T_Mino(2, startY) == currentMino.Get());
         currentMino.TryDrop(board);
@@ -111,10 +111,10 @@ public class CurrentMinoTest
         var currentMino = new CurrentMino();
         currentMino.Set(new T_Mino(2, 0));
         currentMino.TryHardDrop(board);
-        Assert.IsTrue(new T_Mino(2, Board.HEIGHT-1) == currentMino.Get());
+        Assert.IsTrue(new T_Mino(2, Board.DEFAULT_HEIGHT-1) == currentMino.Get());
         
         currentMino.TryHardDrop(board);
-        Assert.IsTrue(new T_Mino(2, Board.HEIGHT-1) == currentMino.Get());
+        Assert.IsTrue(new T_Mino(2, Board.DEFAULT_HEIGHT-1) == currentMino.Get());
     }
     
 }
