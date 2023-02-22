@@ -20,21 +20,21 @@ public class Rule : MonoBehaviour
         IRulePageRenderer rulePageRenderer, 
         RuleBook ruleBook,
         NextMinoHandler nextMinoHandler,
-        [Inject(Id = "gameClear")]CurrentMino gameClearCurrentMino
-        // [Inject(Id = "gameOver")]CurrentMino gameOverCurrentMino
+        [Inject(Id = "gameClear")]CurrentMino gameClearCurrentMino,
+        [Inject(Id = "gameOver")]CurrentMino gameOverCurrentMino
         )
     {
         _rulePageRenderer = rulePageRenderer;
         _ruleBook = ruleBook;
         _nextMinoHandler = nextMinoHandler;
         _gameClearCurrentMino = gameClearCurrentMino;
-        // _gameOverCurrentMino = gameOverCurrentMino;
+        _gameOverCurrentMino = gameOverCurrentMino;
     }
 
     private void Awake()
     {
         _gameClearCurrentMino.Set(_nextMinoHandler.Pop());
-        // _gameOverCurrentMino.Set(_nextMinoHandler.Pop());
+        _gameOverCurrentMino.Set(_nextMinoHandler.Pop());
     }
 
     void Start()

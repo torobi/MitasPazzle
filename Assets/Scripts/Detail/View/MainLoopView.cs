@@ -26,13 +26,15 @@ public class MainLoopView : MonoBehaviour, IMainLoopView
     
     private async UniTaskVoid StartDropLoop(CancellationToken token)
     {
-        while (!token.IsCancellationRequested)
+        var _token = CancellationTokenSource
+                .CreateLinkedTokenSource(new[] { token, this.GetCancellationTokenOnDestroy() }).Token;
+        while (!_token.IsCancellationRequested)
         {
             foreach (var dropController in _dropControllers)
             {
                 dropController.Drop();
             }
-            await UniTask.Delay(DROP_INTERVAL_MS, cancellationToken: token);
+            await UniTask.Delay(DROP_INTERVAL_MS, cancellationToken: _token);
         }
     }
 
@@ -55,7 +57,9 @@ public class MainLoopView : MonoBehaviour, IMainLoopView
 
     private async UniTaskVoid StartDropLoopWithDelay(CancellationToken token)
     {
-        await UniTask.Delay(DROP_INTERVAL_MS, cancellationToken: token);
+        var _token = CancellationTokenSource
+            .CreateLinkedTokenSource(new[] { token, this.GetCancellationTokenOnDestroy() }).Token;
+        await UniTask.Delay(DROP_INTERVAL_MS, cancellationToken: _token);
         StartDropLoop(token).Forget();
     }
 }

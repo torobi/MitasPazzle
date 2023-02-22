@@ -16,15 +16,7 @@ public class BlockView : MonoBehaviour
     [SerializeField] private Sprite yellow;
 
     private readonly Dictionary<BlockState, Sprite> _sprites = new();
-
-    private void OnValidate()
-    {
-        return;
-        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        DefSprites();
-        UpdateState(_state);
-    }
-
+    
     public enum BlockState
     {
         Black,
@@ -50,11 +42,13 @@ public class BlockView : MonoBehaviour
 
     public void UpdateState(BlockState state)
     {
+        if (_spriteRenderer == null) return;
         _spriteRenderer.sprite = _sprites[state];
     }
 
     public void SetAlpha(float alpha)
     {
+        if (_spriteRenderer == null) return;
         var color = _spriteRenderer.color;
         color.a = alpha;
         _spriteRenderer.color = color;

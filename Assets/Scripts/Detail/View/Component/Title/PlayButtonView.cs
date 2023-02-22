@@ -19,6 +19,5 @@ public class PlayButtonView : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _titleButtonController.ClickPlayButton();
-        Debug.Log("click play button");
     }
 }

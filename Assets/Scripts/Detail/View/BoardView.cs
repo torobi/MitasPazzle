@@ -20,7 +20,7 @@ public class BoardView : MonoBehaviour, IBoardView
         DefStateTable();
     }
 
-    private void Start()
+    private void Awake()
     {
         CreateBlocks();
     }

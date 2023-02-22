@@ -132,5 +132,10 @@ namespace Domain.Model
                 }
             }
         }
+
+        public void ChangeState(int x, int y, State state)
+        {
+            _board[y, x] = state;
+        }
     }
 }
