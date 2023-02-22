@@ -37,7 +37,7 @@ namespace Adapter.Presenter
             return blocks.ToArray();
         }
 
-        public void Render(Board board, Mino currentMino)
+        public virtual void Render(Board board, Mino currentMino)
         {
             var state = TrimBoardState(board, MergeBoardAndCurrentMino(board, currentMino));
             for (int y = 0; y < board.ROOM_HEIGHT; y++)

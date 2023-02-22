@@ -20,10 +20,22 @@ public class GameEndRuleView : MonoBehaviour, IGameEndRuleView
     public void Appear()
     {
         this.gameObject.SetActive(true);
+        StartGameClearAnim();
+        StartGameOverAnim();
     }
 
     public void Disappear()
     {
         this.gameObject.SetActive(false);
+    }
+
+    private void StartGameClearAnim()
+    {
+        
+    }
+
+    private void StartGameOverAnim()
+    {
+        
     }
 }

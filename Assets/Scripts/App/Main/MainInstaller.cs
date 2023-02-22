@@ -37,7 +37,7 @@ public class MainInstaller : MonoInstaller
 
         // Controller
         Container.Bind<KeyboardController>().AsSingle();
-        Container.Bind<GamePlayController>().AsSingle();
+        Container.Bind<IDropController>().To<GamePlayController>().AsSingle();
         Container.Bind<ResultButtonController>().AsSingle();
     }
 }

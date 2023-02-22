@@ -121,5 +121,16 @@ namespace Domain.Model
             var blocks = mino.CalcBlocks();
             return blocks.Any(b => b.y < ATTIC_HEIGHT);
         }
+
+        public void ClearState()
+        {
+            for (int i = 0; i < HEIGHT; i++)
+            {
+                for (int j = 0; j < WIDTH; j++)
+                {
+                    _board[i,j] = State.Blank;
+                }
+            }
+        }
     }
 }

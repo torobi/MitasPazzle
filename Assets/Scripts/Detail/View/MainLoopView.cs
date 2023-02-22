@@ -7,15 +7,15 @@ using UnityEngine;
 using Zenject;
 using Cysharp.Threading.Tasks;
 
-public class GamePlayView : MonoBehaviour, IMainLoopView
+public class MainLoopView : MonoBehaviour, IMainLoopView
 {
-    private GamePlayController _gamePlayController;
+    private List<IDropController> _dropControllers;
     private CancellationTokenSource cts = new();
     private int DROP_INTERVAL_MS = 500;
     
     [Inject] 
-    public void Construct(GamePlayController gamePlayController){ 
-        _gamePlayController = gamePlayController;
+    public void Construct(List<IDropController> dropControllers){ 
+        _dropControllers = dropControllers;
     }
     
     // Start is called before the first frame update
@@ -28,7 +28,10 @@ public class GamePlayView : MonoBehaviour, IMainLoopView
     {
         while (!token.IsCancellationRequested)
         {
-            _gamePlayController.Drop();
+            foreach (var dropController in _dropControllers)
+            {
+                dropController.Drop();
+            }
             await UniTask.Delay(DROP_INTERVAL_MS, cancellationToken: token);
         }
     }

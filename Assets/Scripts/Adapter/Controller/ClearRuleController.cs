@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Adapter.Controller
 {
-    public class GamePlayController : IDropController
+    public class ClearRuleController : IDropController
     {
-        private GameUseCase _useCase;
+        private RuleGameClearUseCase _useCase;
 
-        public GamePlayController(GameUseCase useCase)
+        public ClearRuleController(RuleGameClearUseCase useCase)
         {
             _useCase = useCase;
         }
