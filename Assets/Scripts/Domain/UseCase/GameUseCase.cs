@@ -1,4 +1,5 @@
 using Domain.IPresenter;
+using Domain.ITransition;
 using Domain.Model;
 using Domain.Service;
 using Domain.Service.Mino;
@@ -9,6 +10,7 @@ namespace Domain.UseCase
     public class GameUseCase
     {
         private IMainLoopHandler _loopHandler;
+        private ITransitionHandler _transitionHandler;
         
         private IBoardRenderer _boardRenderer;
         private INextMinosRenderer _nextMinosRenderer;
@@ -26,6 +28,7 @@ namespace Domain.UseCase
         
         public GameUseCase(
             IMainLoopHandler loopHandler,
+            ITransitionHandler transitionHandler,
             IBoardRenderer boardRenderer,
             INextMinosRenderer nextMinosRenderer,
             IKeepRenderer keepRenderer,
@@ -40,6 +43,7 @@ namespace Domain.UseCase
         )
         {
             _loopHandler = loopHandler;
+            _transitionHandler = transitionHandler;
             _boardRenderer = boardRenderer;
             _nextMinosRenderer = nextMinosRenderer;
             _keepRenderer = keepRenderer;
@@ -51,6 +55,11 @@ namespace Domain.UseCase
             _board = board;
             _keep = keep;
             _trash = trash;
+        }
+        
+        public void BackToTitle()
+        {
+            _transitionHandler.GoTo(Destination.TitleScene);
         }
         
         public void Drop()

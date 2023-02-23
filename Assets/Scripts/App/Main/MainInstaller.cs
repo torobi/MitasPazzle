@@ -26,7 +26,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<UserUseCase>().AsSingle();
         Container.Bind<GameUseCase>().AsSingle();
         Container.Bind<ResultUseCase>().AsSingle();
-        
+
         // Presenter
         Container.Bind<IMainLoopHandler>().To<MainLoopHandler>().AsSingle();
         Container.Bind<IBoardRenderer>().To<BoardRenderer>().AsSingle();
@@ -38,6 +38,7 @@ public class MainInstaller : MonoInstaller
         // Controller
         Container.Bind<KeyboardController>().AsSingle();
         Container.Bind<IDropController>().To<GamePlayController>().AsSingle();
+        Container.Bind<MainButtonController>().AsSingle();
         Container.Bind<ResultButtonController>().AsSingle();
     }
 }
