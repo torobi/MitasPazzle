@@ -89,7 +89,13 @@ namespace Domain.UseCase
         {
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryHardDrop(this._board);
+            _board.PutMino(_currentMino.Get());
+            _currentMino.Set(_nextMinoHandler.Pop());
             _boardRenderer.Render(_board, _currentMino.Get());
+            _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
+            _trash.ReduceRemain();
+            _trashRenderer.UpdateTrashRemain(_trash.Remain());
+            _keep.UnlockKeep();
             _loopHandler.ResetTiming();
         }
         
