@@ -23,11 +23,11 @@ namespace Adapter.Controller
 
         private void RegisterCallbacks()
         {
-            _keyboard.RegisterCallBack(Keyboard.Key.MoveLeft, DownMoveLeftKey, 0.5f);
-            _keyboard.RegisterCallBack(Keyboard.Key.MoveRight, DownMoveRightKey, 0.5f);
+            _keyboard.RegisterCallBack(Keyboard.Key.MoveLeft, DownMoveLeftKey, 0.3f);
+            _keyboard.RegisterCallBack(Keyboard.Key.MoveRight, DownMoveRightKey, 0.3f);
             _keyboard.RegisterCallBack(Keyboard.Key.TurnLeft, DownTurnLeftKey);
             _keyboard.RegisterCallBack(Keyboard.Key.TurnRight, DownTurnRightKey);
-            _keyboard.RegisterCallBack(Keyboard.Key.Drop, DownDropKey, 0.5f);
+            _keyboard.RegisterCallBack(Keyboard.Key.Drop, DownDropKey, 0.25f);
             _keyboard.RegisterCallBack(Keyboard.Key.HardDrop, DownHardDropKey);
             _keyboard.RegisterCallBack(Keyboard.Key.Keep, DownKeepKey);
             _keyboard.RegisterCallBack(Keyboard.Key.Trash, DownTrashKey);
