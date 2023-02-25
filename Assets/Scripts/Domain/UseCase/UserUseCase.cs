@@ -9,6 +9,8 @@ namespace Domain.UseCase
 {
     public class UserUseCase
     {
+        private GameUseCase _gameUseCase;
+        
         private IMainLoopHandler _loopHandler;
         private IBoardRenderer _boardRenderer;
         private IKeepRenderer _keepRenderer;
@@ -24,6 +26,7 @@ namespace Domain.UseCase
         private LockDown _lockDown;
         
         public UserUseCase(
+            GameUseCase gameUseCase,
             IMainLoopHandler loopHandler,
             IBoardRenderer boardRenderer,
             IKeepRenderer keepRenderer,
@@ -33,10 +36,11 @@ namespace Domain.UseCase
             NextMinoHandler nextMinoHandler,
             Board board,
             Keep keep,
-            Trash trash
-            )
+            Trash trash,
             LockDown lockDown
+        )
         {
+            _gameUseCase = gameUseCase;
             _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
             _keepRenderer = keepRenderer;
@@ -91,24 +95,12 @@ namespace Domain.UseCase
             }
         }
         
-        public void HardDrop()
-        {
-            if (_loopHandler.IsPaused()) return;
-            _currentMino.TryHardDrop(this._board);
-            _board.PutMino(_currentMino.Get());
-            _currentMino.Set(_nextMinoHandler.Pop());
-            _boardRenderer.Render(_board, _currentMino.Get());
-            _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
-            _trash.ReduceRemain();
-            _trashRenderer.UpdateTrashRemain(_trash.Remain());
-            _keep.UnlockKeep();
-            _loopHandler.ResetTiming();
-        }
-        
         public void TryMoveRight()
         {
             if (_loopHandler.IsPaused()) return;
-            _currentMino.TryMoveRight(this._board);
+            var isMoved = _currentMino.TryMoveRight(this._board);
+            
+            if (!isMoved) return;
             LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
@@ -116,7 +108,9 @@ namespace Domain.UseCase
         public void TryMoveLeft()
         {
             if (_loopHandler.IsPaused()) return;
-            _currentMino.TryMoveLeft(this._board);
+            var isMoved = _currentMino.TryMoveLeft(this._board);
+
+            if (!isMoved) return;
             LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
@@ -124,7 +118,9 @@ namespace Domain.UseCase
         public void TryTurnRight()
         {
             if (_loopHandler.IsPaused()) return;
-            _currentMino.TryTurnRight(this._board);
+            var isMoved = _currentMino.TryTurnRight(this._board);
+            
+            if (!isMoved) return;
             LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
@@ -132,7 +128,9 @@ namespace Domain.UseCase
         public void TryTurnLeft()
         {
             if (_loopHandler.IsPaused()) return;
-            _currentMino.TryTurnLeft(this._board);
+            var isMoved = _currentMino.TryTurnLeft(this._board);
+            
+            if (!isMoved) return;
             LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
@@ -140,8 +138,23 @@ namespace Domain.UseCase
         public void TryDrop()
         {
             if (_loopHandler.IsPaused()) return;
-            _currentMino.TryDrop(this._board);
+            var isDropped = _currentMino.TryDrop(this._board);
+            if (!isDropped) return; 
             _boardRenderer.Render(_board, _currentMino.Get());
+            _loopHandler.ResetTiming();
+        }
+        
+        public void HardDrop()
+        {
+            if (_loopHandler.IsPaused()) return;
+            _currentMino.TryHardDrop(this._board);
+            _boardRenderer.Render(_board, _currentMino.Get());
+            _gameUseCase.PutMinoIfNeeded();
+
+            if (!_loopHandler.IsPaused())
+                _loopHandler.ResetTiming();
+        }
+        
 
         private void LockDownIfNeeded()
         {
