@@ -16,6 +16,7 @@ public class MainInstaller : MonoInstaller
         Container.Bind<Board>().AsSingle();
         Container.Bind<Keep>().AsSingle();
         Container.Bind<Trash>().AsSingle();
+        Container.Bind<LockDown>().AsSingle();
         
         // Service
         Container.Bind<ScoreCalculator>().AsSingle();

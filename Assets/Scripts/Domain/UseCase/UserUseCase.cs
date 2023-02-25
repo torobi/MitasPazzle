@@ -21,6 +21,7 @@ namespace Domain.UseCase
         private Board _board;
         private Keep _keep;
         private Trash _trash;
+        private LockDown _lockDown;
         
         public UserUseCase(
             IMainLoopHandler loopHandler,
@@ -34,6 +35,7 @@ namespace Domain.UseCase
             Keep keep,
             Trash trash
             )
+            LockDown lockDown
         {
             _loopHandler = loopHandler;
             _boardRenderer = boardRenderer;
@@ -45,6 +47,7 @@ namespace Domain.UseCase
             _board = board;
             _keep = keep;
             _trash = trash;
+            _lockDown = lockDown;
         }
         
         public void TryTrash()
@@ -57,6 +60,8 @@ namespace Domain.UseCase
                 _currentMino.Set(_nextMinoHandler.Pop());
                 _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
                 _boardRenderer.Render(_board, _currentMino.Get());
+                
+                _lockDown.Reset();
                 _loopHandler.ResetTiming();
             }
         }
@@ -81,6 +86,7 @@ namespace Domain.UseCase
                     _nextMinosRenderer.Render(_nextMinoHandler.GetNextMinos());
                     _boardRenderer.Render(_board, _currentMino.Get());
                 }
+                _lockDown.Reset();
                 _loopHandler.ResetTiming();
             }
         }
@@ -103,6 +109,7 @@ namespace Domain.UseCase
         {
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryMoveRight(this._board);
+            LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
         
@@ -110,6 +117,7 @@ namespace Domain.UseCase
         {
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryMoveLeft(this._board);
+            LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
@@ -117,6 +125,7 @@ namespace Domain.UseCase
         {
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryTurnRight(this._board);
+            LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
         
@@ -124,6 +133,7 @@ namespace Domain.UseCase
         {
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryTurnLeft(this._board);
+            LockDownIfNeeded();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
@@ -132,7 +142,12 @@ namespace Domain.UseCase
             if (_loopHandler.IsPaused()) return;
             _currentMino.TryDrop(this._board);
             _boardRenderer.Render(_board, _currentMino.Get());
+
+        private void LockDownIfNeeded()
+        {
+            if (!_lockDown.CanRockDown() || _currentMino.CanDrop(_board)) return;
             _loopHandler.ResetTiming();
+            _lockDown.DidRockDown();
         }
     }
 }

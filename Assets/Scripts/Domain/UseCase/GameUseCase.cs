@@ -25,7 +25,8 @@ namespace Domain.UseCase
         private Board _board;
         private Keep _keep;
         private Trash _trash;
-        
+        private LockDown _lockDown;
+
         public GameUseCase(
             IMainLoopHandler loopHandler,
             ITransitionHandler transitionHandler,
@@ -39,7 +40,8 @@ namespace Domain.UseCase
             NextMinoHandler nextMinoHandler,
             Board board,
             Keep keep,
-            Trash trash
+            Trash trash,
+            LockDown lockDown
         )
         {
             _loopHandler = loopHandler;
@@ -55,6 +57,7 @@ namespace Domain.UseCase
             _board = board;
             _keep = keep;
             _trash = trash;
+            _lockDown = lockDown;
         }
         
         public void BackToTitle()
@@ -64,7 +67,10 @@ namespace Domain.UseCase
         
         public void Drop()
         {
+            if (!_currentMino.CanDrop(_board)) return;
+            
             _currentMino.TryDrop(_board);
+            _lockDown.Reset();
             _boardRenderer.Render(_board, _currentMino.Get());
         }
 
